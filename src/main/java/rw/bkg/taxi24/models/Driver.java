@@ -1,5 +1,6 @@
-package models;
+package rw.bkg.taxi24.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -19,8 +20,8 @@ public class Driver {
     private String licenseId;
     private String locationId;
     private String name;
+    @JsonIgnore
     @OneToMany(mappedBy = "driver")
-    @ToString.Exclude
     private List<Trip> trips;
 
     @Override

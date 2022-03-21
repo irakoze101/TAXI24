@@ -1,6 +1,6 @@
-package services;
+package rw.bkg.taxi24.services;
 
-import models.Driver;
+import rw.bkg.taxi24.models.Driver;
 
 import java.util.List;
 

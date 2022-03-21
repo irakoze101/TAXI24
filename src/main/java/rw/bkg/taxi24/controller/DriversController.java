@@ -1,10 +1,10 @@
-package controller;
+package rw.bkg.taxi24.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import services.impl.DriverService;
+import rw.bkg.taxi24.services.impl.DriverService;
 
 @CrossOrigin
 @RestController
