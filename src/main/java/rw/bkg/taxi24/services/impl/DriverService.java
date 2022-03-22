@@ -17,7 +17,7 @@ public class DriverService implements IDriverService {
 
     @Override
     public Driver getDriver(String licenseNumber) {
-        if (!driversRepo.existsById(licenseNumber)){
+        if (driversRepo.findById(licenseNumber).isEmpty()){
             return null;
         } else {
             return driversRepo.findById(licenseNumber).get();
