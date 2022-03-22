@@ -1,4 +1,4 @@
-package models;
+package rw.bkg.taxi24.models;
 
 public enum TripStatus {
     PENDING,

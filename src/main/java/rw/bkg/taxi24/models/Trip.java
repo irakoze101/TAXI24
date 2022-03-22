@@ -1,4 +1,4 @@
-package models;
+package rw.bkg.taxi24.models;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -28,10 +28,12 @@ public class Trip {
     private String duration;
     private String distance;
     @ManyToOne
-    @JoinColumn(name = "driver_id")
+    @JoinColumn(name = "driver_id",
+    nullable = false)
     private Driver driver;
     @ManyToOne
-    @JoinColumn(name = "rider_id")
+    @JoinColumn(name = "rider_id",
+    nullable = false)
     private Rider rider;
 
     @Override

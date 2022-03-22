@@ -1,5 +1,6 @@
-package models;
+package rw.bkg.taxi24.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -29,6 +30,7 @@ public class Rider {
     private String birthDate;
     private double latitude;
     private double longitude;
+    @JsonIgnore
     @OneToMany(mappedBy = "rider")
     @ToString.Exclude
     private List<Trip> trips;
