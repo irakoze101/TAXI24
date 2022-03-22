@@ -39,6 +39,6 @@ public class DriversController {
                 (latitude == 0 && longitude == 0)) {
             throw new HandlerBadRequest("Invalid latitude or longitude");
         }
-        return ResponseEntity.ok(driversService.getNearbyDrivers(latitude, longitude));
+        return ResponseEntity.ok(driversService.getNearbyDrivers(latitude, longitude, 3));
     }
 }
