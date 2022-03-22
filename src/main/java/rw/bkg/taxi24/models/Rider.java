@@ -7,8 +7,15 @@ import org.hibernate.Hibernate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -46,5 +53,24 @@ public class Rider {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (id == null) {
+            MessageDigest messageDigest = null;
+            try {
+                messageDigest = MessageDigest.getInstance("SHA-256");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            Objects.requireNonNull(messageDigest).update(UUID.randomUUID().toString().getBytes(
+                    StandardCharsets.UTF_8));
+            id = String.format(Locale.ENGLISH,
+                    "%032x",
+                    new BigInteger(1, messageDigest
+                            .digest()))
+                    .toUpperCase(Locale.ROOT);
+        }
     }
 }
