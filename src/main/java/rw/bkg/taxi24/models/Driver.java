@@ -18,10 +18,12 @@ import java.util.Objects;
 public class Driver {
     @Id
     private String licenseId;
-    private String locationId;
+    private double longitude;
+    private double latitude;
     private String name;
     @JsonIgnore
     @OneToMany(mappedBy = "driver")
+    @ToString.Exclude
     private List<Trip> trips;
 
     @Override
