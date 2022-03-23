@@ -16,7 +16,7 @@ public class RidersController {
         this.riderService = riderService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> getRiders() {
         return ResponseEntity.ok(riderService.getAllRiders());
     }

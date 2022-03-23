@@ -19,7 +19,7 @@ public class DriversController {
         this.driversService = driversService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<?> getDrivers() {
         return ResponseEntity.ok(driversService.getAllDrivers());
     }
