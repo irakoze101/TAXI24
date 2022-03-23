@@ -3,11 +3,9 @@ package rw.bkg.taxi24.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -35,7 +33,9 @@ public class Rider {
     private String country;
     private String postalCode;
     private String birthDate;
+    @Column(nullable = true)
     private double latitude;
+    @Column(nullable = true)
     private double longitude;
     @JsonIgnore
     @OneToMany(mappedBy = "rider")
