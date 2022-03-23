@@ -35,10 +35,11 @@ public class TripService implements ITripService {
         try {
             starting = format.parse(trip.getStartTime());
             ending = format.parse(format.format(new Date()));
+            trip.setEndTime(format.format(ending));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        trip.setDuration(numberFormat.format((starting.getTime() - ending.getTime()) / (1000 * 60)));
+        trip.setDuration(numberFormat.format((ending.getTime() - starting.getTime()) / (1000 * 60)));
         trip.setStatus(TripStatus.FINISHED);
 
         repo.save(trip);
@@ -48,7 +49,8 @@ public class TripService implements ITripService {
     public List<Trip> getTrips(boolean isCompleted) {
         return isCompleted ? repo.findAll()
                 .stream()
-                .filter(t -> t.getStatus() == TripStatus.FINISHED)
+                .filter(t -> t.getStatus() == TripStatus.PENDING)
+                .map(this::calculateDuration)
                 .collect(Collectors.toList()): repo.findAll();
     }
 
@@ -78,5 +80,20 @@ public class TripService implements ITripService {
             return repo.findById(Long.valueOf(tripId)).get();
         }
         return null;
+    }
+
+    private Trip calculateDuration (Trip trip) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        Date starting = null;
+        Date ending = null;
+        try {
+            starting = format.parse(trip.getStartTime());
+            ending = format.parse(format.format(new Date()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        trip.setDuration(numberFormat.format((ending.getTime() - starting.getTime()) / (1000 * 60)));
+        return trip;
     }
 }

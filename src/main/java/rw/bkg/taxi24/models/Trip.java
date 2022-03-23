@@ -17,12 +17,6 @@ import java.util.Objects;
 @Entity(name = "TRIP")
 public class Trip {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(
-            initialValue = 1000,
-            name = "trip_id_seq",
-            sequenceName = "trip_id_seq",
-            allocationSize = 1)
     private Long id;
     private TripStatus status;
     private String startStationId;

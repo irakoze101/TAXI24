@@ -51,6 +51,6 @@ public class TripsController {
 
     @GetMapping("/list/{status}")
     public ResponseEntity<?> getTripsByStatus(@PathVariable("status") TripStatus status) {
-        return ResponseEntity.ok(service.getTrips(status.equals(TripStatus.FINISHED)));
+        return ResponseEntity.ok(service.getTrips(status.equals(TripStatus.PENDING)));
     }
 }
