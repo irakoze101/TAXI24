@@ -9,6 +9,6 @@ import java.util.List;
 @Component
 public interface IRiderService {
     List<Rider> getAllRiders();
-    Rider getRiderById(int id);
+    Rider getRiderById(String id);
     List<Driver> getClosestDrivers(Rider rider);
 }

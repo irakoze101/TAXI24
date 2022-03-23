@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import rw.bkg.taxi24.models.Driver;
 import rw.bkg.taxi24.repos.DriversRepo;
+import rw.bkg.taxi24.utils.Utilities;
 
 @ContextConfiguration(classes = {DriverService.class})
 @ExtendWith(SpringExtension.class)
@@ -66,7 +67,7 @@ class DriverServiceTest {
     @Test
     void testGetNearbyDrivers() {
         when(this.driversRepo.findAll()).thenReturn(new ArrayList<>());
-        assertTrue(this.driverService.getNearbyDrivers(10.0d, 10.0d).isEmpty());
+        assertTrue(this.driverService.getNearbyDrivers(10.0d, 10.0d, 3).isEmpty());
         verify(this.driversRepo).findAll();
     }
 
@@ -100,7 +101,7 @@ class DriverServiceTest {
         ArrayList<Driver> driverList = new ArrayList<>();
         driverList.add(driver);
         when(this.driversRepo.findAll()).thenReturn(driverList);
-        assertEquals(1, this.driverService.getNearbyDrivers(-1.943189871008775, 30.058778098405273).size());
+        assertEquals(1, this.driverService.getNearbyDrivers(-1.943189871008775, 30.058778098405273, 3).size());
         verify(this.driversRepo).findAll();
     }
 
@@ -138,13 +139,13 @@ class DriverServiceTest {
         driverList.add(dri);
 
         when(this.driversRepo.findAll()).thenReturn(driverList);
-        assertEquals("Nearest Driver", this.driverService.getNearbyDrivers(-1.9474038564982663, 30.065876056504635).get(0).getName());
+        assertEquals("Nearest Driver", this.driverService.getNearbyDrivers(-1.9474038564982663, 30.065876056504635, 3).get(0).getName());
         verify(this.driversRepo).findAll();
     }
 
     @Test
     void testGetDistance() {
-        assertEquals(176, this.driverService.getDistance(-1.970579, -3.361378, 30.104429, 29.359879));
+        assertEquals(176, Utilities.getDistance(-1.970579, -3.361378, 30.104429, 29.359879));
     }
 }
 
