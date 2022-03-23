@@ -42,6 +42,11 @@ public class Rider {
     @ToString.Exclude
     private List<Trip> trips;
 
+    public Rider(double lat, double lng) {
+        this.latitude = lat;
+        this.longitude = lng;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
