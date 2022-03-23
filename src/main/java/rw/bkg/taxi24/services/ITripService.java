@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ITripService {
     void completeTrip(String tripId);
-    List<Trip> getTrips();
+    List<Trip> getTrips(boolean isCompleted);
     Trip createTrip(Rider rider, String destination);
 }

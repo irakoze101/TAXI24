@@ -62,11 +62,13 @@ public class Trip {
         return getClass().hashCode();
     }
 
-    public Trip(String startStationId, String endStationId, String distance, Driver driver, Rider rider) {
+    public Trip(String startStationId, String endStationId, String distance, Driver driver, Rider rider, Long id, TripStatus status) {
         this.startStationId = startStationId;
         this.endStationId = endStationId;
         this.distance = distance;
         this.driver = driver;
         this.rider = rider;
+        this.id = id;
+        this.status = status;
     }
 }
