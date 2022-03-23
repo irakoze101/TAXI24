@@ -27,10 +27,9 @@ public class TripService implements ITripService {
     }
 
     @Override
-    public void completeTrip(String tripId) {
+    public void completeTrip(Trip trip) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         NumberFormat numberFormat = NumberFormat.getInstance();
-        Trip trip = repo.findById(Long.valueOf(tripId)).get();
         Date starting = null;
         Date ending = null;
         try {
@@ -71,5 +70,13 @@ public class TripService implements ITripService {
         );
         repo.save(newTrip);
         return newTrip;
+    }
+
+    @Override
+    public Trip getTrip(String tripId) {
+        if (repo.findById(Long.valueOf(tripId)).isPresent()) {
+            return repo.findById(Long.valueOf(tripId)).get();
+        }
+        return null;
     }
 }

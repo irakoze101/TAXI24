@@ -7,7 +7,8 @@ import rw.bkg.taxi24.models.Trip;
 import java.util.List;
 
 public interface ITripService {
-    void completeTrip(String tripId);
+    void completeTrip(Trip trip);
     List<Trip> getTrips(boolean isCompleted);
     Trip createTrip(Rider rider, String destination);
+    Trip getTrip(String tripId);
 }

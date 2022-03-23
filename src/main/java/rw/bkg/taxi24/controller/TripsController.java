@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import rw.bkg.taxi24.exceptions.HandlerNotFound;
 import rw.bkg.taxi24.models.Rider;
 import rw.bkg.taxi24.models.Trip;
+import rw.bkg.taxi24.models.TripStatus;
 import rw.bkg.taxi24.services.impl.RiderServiceImpl;
 import rw.bkg.taxi24.services.impl.TripService;
 
@@ -35,5 +36,21 @@ public class TripsController {
 
         Trip trip = service.createTrip(rider, String.format("%s,%s", endLat, endLng));
         return ResponseEntity.ok(trip);
+    }
+
+    @GetMapping("/complete")
+    public ResponseEntity<?> completeTrip(@RequestParam(value = "trip_id", required = true) String tripId) {
+        Trip trip = service.getTrip(tripId);
+        if (trip == null) {
+            return ResponseEntity.badRequest().body("The trip does not exist");
+        }
+        service.completeTrip(trip);
+        trip.setStatus(TripStatus.FINISHED);
+        return ResponseEntity.ok(trip);
+    }
+
+    @GetMapping("/list/{status}")
+    public ResponseEntity<?> getTripsByStatus(@PathVariable("status") TripStatus status) {
+        return ResponseEntity.ok(service.getTrips(status.equals(TripStatus.FINISHED)));
     }
 }
